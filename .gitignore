@@ -1,0 +1,5 @@
+model/relation-calculator.json
+tests
+debug.txt
+.env
+__pycache__
