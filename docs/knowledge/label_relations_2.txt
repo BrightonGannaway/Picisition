@@ -1,0 +1,33 @@
+
+Examples of human response to the relation between things. 
+
+Key:
+---
+input: an object a human guesses 
+target: an object that the input is compared to
+relation: a precentage relation expressed in decimal form. This reflects how close input and target are in human understanding
+---
+
+example scope {
+target: "computer" input: "phone" relation: 0.94 (#subject field: tech #purpose: programs and applications #shape: rectangle #material: electronics)
+target: "computer" input: "apple" relation: 0.21 (#culture relation: apple computers)
+target: "computer" input: "snowglobe" relation: 0.05 (#material glass)
+
+target: "clock" input: "smartwatch" relation: 0.87
+target: "clock" input: "wheel" relation: 0.50 (#shape: circular)
+target: "clock" input: "horse" relation: 0.0 
+
+target: "person" input: "monkey" relation: 0.80 
+target: "person" input: "plane" relation: 0.35 (#purpose: transport people)
+target: "person" input: "flower" relation: 0.04 (#subject field: life)
+
+target: "bandage" input: "tape" relation: 0.97
+target: "bandage" input: "bread" relation: 0.38 (#subject field: general supplies #culture: war supplies)
+target: "bandage" input: "toilet" relation: 0.09 (#purpose: related with unsanitary subjects)
+
+target: "pen" input: "pencil" relation: 0.99 (#purpose: both are used to write #shape both have similar shape #subject field: both are in writing)
+target: "pen" input: "apple" relation: 0.48 (#culture: both are found in a classroom setting)
+target: "pen" input: "skunk" relation: 0.01
+
+}
+

@@ -1,0 +1,14 @@
+These settings provide compliant responses - do not change any of the files mentioned
+If you edit settings and the model becomes incomplacent, revert back to these settings
+
+Working Version 1.0 
+
+            system_prompt = src/model/system_prompts/model_prompt
+            base_url = "http://localhost:8080/api/chat/completions"
+            headers = {
+                "Content-Type": "application/json"
+            }
+            temperature = 0.2
+            top_p = 0.95
+            max_tokens = 1000
+            stop_sequences = ["<end>"]

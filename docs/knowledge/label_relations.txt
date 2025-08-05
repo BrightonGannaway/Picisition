@@ -1,0 +1,36 @@
+
+
+core components (What relation is based on)
+1. color
+2. shape
+3. purpose 
+4. subject field (ex. tech, entertainment, sports)
+5. material
+6. culture
+
+
+examples (with reasoning marked in parathesis)
+
+target: "computer" input: "phone" relation: 0.94 (#subject field: tech #purpose: programs and applications #shape: rectangle #material: electronics)
+target: "computer" input: "apple" relation: 0.21 (#culture relation: apple computers)
+target: "computer" input: "snowglobe" relation: 0.05 (#material glass)
+
+target: "clock" input: "smartwatch" relation: 0.87
+target: "clock" input: "wheel" relation: 0.50 (#shape: circular)
+target: "clock" input: "horse" relation: 0.0 
+
+target: "person" input: "monkey" relation: 0.80 
+target: "person" input: "plane" relation: 0.35 (#purpose: transport people)
+target: "person" input: "flower" relation: 0.04 (#subject field: life)
+
+target: "bandage" input: "tape" relation: 0.97
+target: "bandage" input: "bread" relation: 0.38 (#subject field: general supplies #culture: war supplies)
+target: "bandage" input: "toilet" relation: 0.09 (#purpose: related with unsanitary subjects)
+
+
+!!IMPORTANT!! - Output format
+
+"A(n) <in> {input} </in> is <rel> {relation} </rel> related to a(n) <tar> {target} </tar>"
+
+example: "A(n) <in> person</in> is <rel> 0.35 </rel> related to a(n) <tar> plane </tar>
+
