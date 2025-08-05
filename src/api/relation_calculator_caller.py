@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 class RelationCalculatorCaller:
     def __init__(self):
         self.model_api = Model_API()
-        self.model_api.set_System_Prompt("src/model/system_prompts/model_prompt.txt")
+        self.model_api.set_System_Prompt("image_game/src/model/system_prompts/model_prompt.txt")
 
 
     def query_relation(self, input: str, target: str, model="relation-calculatorlatest",):

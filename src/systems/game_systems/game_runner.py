@@ -18,3 +18,9 @@ class Game_Runner:
 
     def check_win_condition(self, guess):
         return self.game_logic.check_guess(guess)
+
+    def relate_guess_to_goal(self, guess):
+        if self.game_logic.check_guess(guess):
+            return 1.0  # 100% related
+        else:
+            return self.game_logic.get_analysis_result(guess)

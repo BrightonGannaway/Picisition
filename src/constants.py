@@ -27,6 +27,10 @@ class Constants:
             COMPLETED = "completed"
             FAILED = "failed"
 
+        class files:
+            ran_calculations = "image_game/db/ran_calculations.txt"
+            model_prompt = "image_game/src/model/system_prompts/model_prompt.txt"
+
     class ModelAPI:
         
         class Defaults:

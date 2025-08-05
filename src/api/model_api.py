@@ -66,4 +66,3 @@ class Model_API:
     def set_System_Prompt(self, filename: str):
         with open(filename, "r") as file:
             self.model_prompt = file.read().strip()
-            print("Setting prompt set to:", self.model_prompt)

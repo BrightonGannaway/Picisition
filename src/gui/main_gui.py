@@ -3,6 +3,7 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import cv2
 import threading
+import time
 
 
 import os
@@ -65,7 +66,9 @@ class Main_GUI:
             self.analyze_capture()
 
     def analyze_capture(self):
-        self.detector.detect_object(f"image_game/tests/images/{self.capture_name}.jpg")
+        self.detector.detect_object(f"image_game/tests/images/{self.capture_name}.jpg", output="image_game/db/images/result.jpg")
+
+        time.sleep(5) #wait for ram to be freed up
         result_text = self.get_analysis_result()
         self.set_analysis_result(result_text)
 
@@ -80,10 +83,18 @@ class Main_GUI:
         if class_name is None:
             return "No class detected"
         
-        result_str = "\nResult: CORRECT" if self.runner.check_win_condition(class_name) else "\nResult: Incorrect :("
+        value = self.runner.relate_guess_to_goal(class_name)
+        if value is None:
+            result_str = "\nResult: No relation found"
+            return result_str
+
+        result_str = f"Result: {int(value * 100)}% related to goal"
+
+        if value == 1.0:
+            result_str = "CORRECT - " + result_str
             
 
-        return f"Detected: {class_name}" + result_str
+        return f"Detected: {class_name}" + "\n" + result_str
 
     def request_goal_match(self):
         return self.runner
