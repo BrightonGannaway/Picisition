@@ -5,4 +5,6 @@ debug.txt
 .env
 __pycache__/
 db/images/result.jpg
-bin/*
+/bin/*
+bin/glove_100d.kv
+bin/glove_100d.kv.vectors.npy
