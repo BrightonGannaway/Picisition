@@ -3,7 +3,7 @@
 import sys
 import os
 import argparse
-
+import numpy as np
 
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from src.constants import Constants
 
 from jetson_inference import detectNet
-from jetson_utils import videoSource, videoOutput, Log
+from jetson_utils import videoSource, videoOutput, cudaDeviceSynchronize, cudaFromNumpy, loadImage, saveImage
 
 class Detection:
 
@@ -22,22 +22,38 @@ class Detection:
         self.output = None
         self.recent_detections = []
 
-    def detect_object (self, input, output = "db/images/result.jpg", network_arg="ssd-mobilenet-v2", overlay="box,labels,conf", threshold_arg=0.5):
+    def detect_object (self, input, output = "db/images/result_out.jpg", network_arg="ssd-mobilenet-v2", overlay="box,labels,conf", threshold_arg=0.5):
         self.net = detectNet(network_arg, argv=self.argv, threshold = threshold_arg)
         
-        self.input = videoSource(input)
-        self.output = videoOutput(output)
-        img = self.input.Capture()
+        # cudaDeviceSynchronize()
+        # self.input = videoSource(input)
+        # #self.input = cudaFromNumpy(self.input)
+        # self.output = videoOutput(output)
+        # img = self.input.Capture()
+        # detections = self.net.Detect(img)
+
+        img = None
+        #image input is from a file
+        if os.path.isfile(input):
+            img = loadImage(input)
+            
+        if isinstance(input, np.ndarray):
+            img = cudaFromNumpy(input)
+
+        if img is None:
+            raise ValueError(f"Input image is not valid. Please provide a valid image file or numpy array. Input: {input}")
+        
         detections = self.net.Detect(img)
         self.recent_detections = detections
+        saveImage(output, img)
 
         print("detected {:d} objects in image".format(len(detections)))
         for detection in detections:
             print(detection)
 
-        self.output.Render(img)
+        # self.output.Render(img)
 
-        self.output.SetStatus("{:s} | Network {:.0f} FPS".format(network_arg, self.net.GetNetworkFPS()))
+        # self.output.SetStatus("{:s} | Network {:.0f} FPS".format(network_arg, self.net.GetNetworkFPS()))
         # print out performance info
         self.net.PrintProfilerTimes()
 
@@ -45,6 +61,7 @@ class Detection:
     # This is a simple heuristic and can be adjusted based on the specific requirements of the game.
     def get_Most_Prominent_Detection(self):
         if not self.recent_detections:
+            print("No recent detections found.")
             return None
         
         if len(self.recent_detections) == 1:

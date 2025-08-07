@@ -30,7 +30,7 @@ class Main_GUI:
         self.analysis_result_label.pack()
 
         self.cap = cv2.VideoCapture(0)
-        self.capture_name = "result"
+        self.capture_name = "input"
 
         self.capture_button = tk.Button(self.root, text="Capture", command=self.capture)
         self.capture_button.pack()
@@ -63,10 +63,11 @@ class Main_GUI:
         ret, frame = self.cap.read()
         if ret:
             cv2.imwrite(f"db/images/{self.capture_name}.jpg", frame)
-            self.analyze_capture()
+            self.analyze_capture(input=frame)
 
-    def analyze_capture(self):
-        self.detector.detect_object(f"db/images/{self.capture_name}.jpg", output="db/images/result.jpg")
+    def analyze_capture(self, input="db/images/{self.capture_name}.jpg"):
+        self.detector.detect_object(input=input, output="db/images/result_out.jpg")
+        # self.detector.detect_object(f"db/images/{self.capture_name}.jpg", output="db/images/result_out.jpg")
 
         result_text = self.get_analysis_result()
         self.set_analysis_result(result_text)
