@@ -62,13 +62,12 @@ class Main_GUI:
     def capture(self):
         ret, frame = self.cap.read()
         if ret:
-            cv2.imwrite(f"image_game/tests/images/{self.capture_name}.jpg", frame)
+            cv2.imwrite(f"db/images/{self.capture_name}.jpg", frame)
             self.analyze_capture()
 
     def analyze_capture(self):
-        self.detector.detect_object(f"image_game/tests/images/{self.capture_name}.jpg", output="image_game/db/images/result.jpg")
+        self.detector.detect_object(f"db/images/{self.capture_name}.jpg", output="db/images/result.jpg")
 
-        time.sleep(5) #wait for ram to be freed up
         result_text = self.get_analysis_result()
         self.set_analysis_result(result_text)
 
@@ -85,10 +84,10 @@ class Main_GUI:
         
         value = self.runner.relate_guess_to_goal(class_name)
         if value is None:
-            result_str = "\nResult: No relation found"
+            result_str = "\nResult: No relation found - please try again with a different guess"
             return result_str
 
-        result_str = f"Result: {int(value * 100)}% related to goal"
+        result_str = f"Result: {(value * 100):.2f}% related to goal"
 
         if value == 1.0:
             result_str = "CORRECT - " + result_str

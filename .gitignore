@@ -1,5 +1,7 @@
 model/relation-calculator.json
 tests
+test_embed
 debug.txt
 .env
-__pycache__
+__pycache__/
+db/images/result.jpg

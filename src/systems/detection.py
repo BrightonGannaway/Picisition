@@ -22,7 +22,7 @@ class Detection:
         self.output = None
         self.recent_detections = []
 
-    def detect_object (self, input, output = "image_game/tests/test_images/results/result.jpg", network_arg="ssd-mobilenet-v2", overlay="box,labels,conf", threshold_arg=0.5):
+    def detect_object (self, input, output = "db/images/result.jpg", network_arg="ssd-mobilenet-v2", overlay="box,labels,conf", threshold_arg=0.5):
         self.net = detectNet(network_arg, argv=self.argv, threshold = threshold_arg)
         
         self.input = videoSource(input)
