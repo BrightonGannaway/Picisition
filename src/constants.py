@@ -1,5 +1,8 @@
 class Constants:
 
+    class Game_Settings:
+        release = "prod"
+
     class DetectNet:
 
         argv = ['ssd-mobilenet-v2', 'models/labels.txt', '--input-blob=input_0', '--output-cvg=scores', '--output-bbox=boxes']
@@ -48,8 +51,8 @@ class Constants:
             latest_working = "src/model/system_prompts/model_prompt.txt"
             default = "src/model/system_prompts/model_prompt.txt"
 
-    class classes:
-        COCO = words_to_test = [
+    class Classes:
+        COCO = [
             "person", "bicycle", "car", "motorcycle", "airplane", "bus", "train", "truck", "boat", "traffic light",
             "fire hydrant", "street sign", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse", "sheep",
             "cow", "elephant", "bear", "zebra", "giraffe", "hat", "backpack", "umbrella", "shoe", "eye glasses",
@@ -60,6 +63,10 @@ class Constants:
             "desk", "toilet", "door", "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "microwave", "oven",
             "toaster", "sink", "refrigerator", "blender", "book", "clock", "vase", "scissors", "teddy bear",
             "hair drier", "toothbrush", "hair brush"
+        ]
+
+        Demo = [
+            "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "person", "door", "desk", "chair", "bottle"
         ]
         
 

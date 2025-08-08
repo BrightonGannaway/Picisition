@@ -21,6 +21,7 @@ class Detection:
         self.input = None
         self.output = None
         self.recent_detections = []
+        self.prominent_detections = []
 
     def detect_object (self, input, output = "db/images/result_out.jpg", network_arg="ssd-mobilenet-v2", overlay="box,labels,conf", threshold_arg=0.5):
         self.net = detectNet(network_arg, argv=self.argv, threshold = threshold_arg)
@@ -73,6 +74,7 @@ class Detection:
             print(f"Detection Area: {detection.Area}")
             
         most_prominent = max(self.recent_detections, key=lambda d: d.Area)
+        self.prominent_detections.append(most_prominent)
         return most_prominent
     
     def get_detection_class(self, detection):
@@ -83,6 +85,9 @@ class Detection:
         
     def get_recent_detections(self):
         return self.recent_detections
+    
+    def get_prominent_detections(self):
+        return self.prominent_detections
     
 
         

@@ -16,6 +16,10 @@ class Game_Runner:
         self.game_logic.start_game()
         print(f"Game started with goal: {self.game_logic.goal}")
 
+    def new_game(self):
+        self.game_logic.set_random_goal()
+        print(f"New game started with goal: {self.game_logic.goal}")
+
     def check_win_condition(self, guess):
         return self.game_logic.check_guess(guess)
 

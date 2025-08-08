@@ -29,6 +29,11 @@ class Main_GUI:
         self.analysis_result_label = tk.Label(self.root, text="Analysis Result: ")
         self.analysis_result_label.pack()
 
+        self.detection_to_percent = dict() # use max to find highest detection and get the class name
+        self.highest_detection = None
+        self.highest_detection_label = tk.Label(self.root, text="Highest Detection: ")
+        self.highest_detection_label.pack()
+
         self.cap = cv2.VideoCapture(0)
         self.capture_name = "input"
 
@@ -37,6 +42,10 @@ class Main_GUI:
 
         # self.analyze_button = tk.Button(self.root, text="analyze", command=self.analyze_capture)
         # self.analyze_button.pack()
+
+        self.new_target_button = tk.Button(self.root, text="New Object Target", command=self.reset_game)
+        self.new_target_button.pack()
+    
 
         self.exit_button = tk.Button(self.root, text="Exit", command=self.close_app)
         self.exit_button.pack()
@@ -71,10 +80,11 @@ class Main_GUI:
 
         result_text = self.get_analysis_result()
         self.set_analysis_result(result_text)
+        self.set_highest_detection()
+
 
     def get_analysis_result(self):
         prominent = self.detector.get_Most_Prominent_Detection()
-
         if prominent is None:
             return "No objects detected"
         
@@ -89,7 +99,7 @@ class Main_GUI:
             return result_str
 
         result_str = f"Result: {(value * 100):.2f}% related to goal"
-
+        self.detection_to_percent[class_name] = value
         if value == 1.0:
             result_str = "CORRECT - " + result_str
             
@@ -101,6 +111,36 @@ class Main_GUI:
 
     def set_analysis_result(self, result_text):
         self.analysis_result_label.config(text=result_text)
+
+    def set_highest_detection(self):
+        print("detection map: ",self.detection_to_percent)
+        if not self.detection_to_percent:
+            self.highest_detection_label.config(text="Highest Detection: None")
+            return
+        
+        for value, detection in self.detection_to_percent.items():
+            print(f"Detection: {detection}, Value: {value}")
+
+        prominent = max(self.detection_to_percent, key=lambda v: self.detection_to_percent[v])
+        prominent_percent = self.detection_to_percent.get(prominent, None)
+        
+        if prominent == self.highest_detection:
+            print(f"Same detection {prominent} already set, skipping update.")
+            return #skip process if the same detection is already set
+        if prominent is not None:
+            print(f"Setting new highest detection: {prominent} with value {prominent_percent}")
+            self.highest_detection = prominent
+            self.highest_detection_label.config(text=f"Highest Detection: {prominent} ({prominent_percent * 100:.2f}%)")
+
+    def reset_detection_score(self):
+        self.detection_to_percent.clear()
+        self.highest_detection = None
+        self.highest_detection_label.config(text="Highest Detection: None")    
+
+    def reset_game(self):
+        self.reset_detection_score()
+        self.runner.new_game()
+        self.set_analysis_result("New Game Started\n Analysis Result: ")
 
     def close_app(self):
         self.cap.release()

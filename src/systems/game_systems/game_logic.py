@@ -18,7 +18,6 @@ class Game_Logic:
     def start_game(self):
         self.game_state = Constants.GameLogic.GameStates.IN_PROGRESS
 
-
     def set_goal(self, goal):
         self.goal = goal
     
@@ -43,5 +42,8 @@ class Game_Logic:
     def get_labels(self):
         # This method should return the labels of the detection model
         # For now, we will return a placeholder list
-        return ["tv", "laptop", "person"]
+        if Constants.Game_Settings.release == "demo":
+            return Constants.Classes.Demo
+        else:
+            return Constants.Classes.COCO
     
