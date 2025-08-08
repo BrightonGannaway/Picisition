@@ -108,6 +108,7 @@ as the Jetson kept running out of memory to even support basic processes such as
 
 **Solution**: After much debugging and looking at error messages, the error arise based off of a trouble with an invalid openGl or DirectX context (error 219). As a result,
 I decided to remove dependencies revolving around VideoSource and VideoOutput instead moving towards simpler methods. The most current version uses `loadImage` something I should have used at the start.
+
 ---
 
 
