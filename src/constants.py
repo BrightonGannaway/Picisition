@@ -66,7 +66,7 @@ class Constants:
         ]
 
         Demo = [
-            "tv", "laptop", "mouse", "remote", "keyboard", "cell phone", "person", "door", "desk", "chair", "bottle"
+            "tv", "laptop", "mouse", "keyboard", "cell phone", "person", "door", "desk", "chair", "bottle"
         ]
         
 

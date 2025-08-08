@@ -55,6 +55,7 @@ __Good Luck and Have Fun__
 
 ## How To Play ##
 
+Video Demonstration
 Make sure you are connected to a monitor and camera before you begin.
 
 Start the game by running:
@@ -72,6 +73,17 @@ Keep guessing until you find the goal.
 Once you found the target, you can play again by clicking: "New Object Target"
 
 ---
+## Functionality
+
+The program functions in two parts:
+
+* Detection: The user uses the `capture` button and detectNet scans the image. After detectNet has finished, the class with the largest Area is chosen as the captured object.
+* Relation: The class of the object then goes through a process where it is compared to the target using word embeddings. The relation is calculated using a cosine function.to find an orthagonical point between them.
+
+After the detections and relations have been processed, the results are displayed to the user and the game continues.
+
+---
+
 
 ## The Making ##
 ---
