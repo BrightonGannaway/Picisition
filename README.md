@@ -55,7 +55,9 @@ __Good Luck and Have Fun__
 
 ## How To Play ##
 
-Video Demonstration
+[Video Demonstration](https://github.com/user-attachments/assets/d7d62980-57bc-4241-9340-912e1a9bfd1a)
+
+
 Make sure you are connected to a monitor and camera before you begin.
 
 Start the game by running:
